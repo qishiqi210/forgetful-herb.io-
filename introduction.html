@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT写ppt模板</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Zhi+Mang+Xing&display=swap">
+    <style>
+        body {
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.6;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(211, 211, 211, 0.5)), url('路径到你的文件夹/2.png');
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: center;
+        }
+        h1 {
+            color: #1a1a1a;
+            font-size: 2.5em;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin: 10px 0;
+            color: red;
+            display: inline-block;
+        }
+        .hint {
+            font-size: 0.8em;
+            color: #555;
+        }
+        p, pre {
+            margin: 10px 0;
+            color: #808080;
+            background: linear-gradient(to bottom, #808080, #000000);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .slider {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            flex: 0 0 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        img.active {
+            opacity: 1;
+        }
+        .control-prev, .control-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            cursor: pointer;
+        }
+        .control-prev { left: 10px; }
+        .control-next { right: 10px; }
+        .dots {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        .active, .dot:hover {
+            background-color: #717171;
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            position: fixed;
+            font-size: 72px;
+            color: #333;
+            font-family: 'Zhi Mang Xing', cursive;
+        }
+        .left-text {
+            top: 50%;
+            left: 2%;
+            transform: translateY(-50%);
+        }
+        .right-text {
+            top: 50%;
+            right: 2%;
+            transform: translateY(-50%);
+        }
+        .navbar {
+            text-align: center;
+            padding: 14px 0;
+        }
+        .navbar a {
+            display: inline-block;
+            color: #333;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            color: #555;
+        }
+        .navbar a:not(:last-child)::after {
+            content: "|";
+            margin: 0 8px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">首页</a>
+        <a href="introduction.html">简介</a>
+        <a href="contact.html">联系</a>
+    </div>
+
+    <div class="content">
+        <h1>ChatGPT写ppt模板</h1>
+        <div class="slider" id="slider">
+            <div class="slides" id="slides">
+                <img src="1.jpg" alt="图片描述1" class="active">
+                <img src="1.jpg" alt="图片描述2">
+                <img src="1.jpg" alt="图片描述3">
+            </div>
+            <div class="control-prev" onclick="showPrevSlide()">❮</div>
+            <div class="control-next" onclick="showNextSlide()">❯</div>
+        </div>
+        <div class="dots">
+            <span class="dot" onclick="showCurrentSlide(0)"></span>
+            <span class="dot" onclick="showCurrentSlide(1)"></span>
+            <span class="dot" onclick="showCurrentSlide(2)"></span>
+        </div>
+       
+           
+        </pre>
+    </div>
+    
+    <div class="vertical-text left-text">1122</div>
+    <div class="vertical-text right-text">3344</div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.getElementById('slides');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.children.length;
+        slides.appendChild(slides.children[0].cloneNode(true));
+
+        function showSlide(index) {
+            slides.children[currentSlideIndex].classList.remove('active');
+            currentSlideIndex = index;
+            slides.children[currentSlideIndex].classList.add('active');
+            updateSlidePosition();
+            updateDots();
+        }
+
+        function showNextSlide() {
+            slides.children[currentSlideIndex].classList.remove('active');
+            currentSlideIndex = (currentSlideIndex + 1) % (totalSlides + 1);
+            slides.children[currentSlideIndex].classList.add('active');
+            updateSlidePosition();
+            updateDots();
+            if (currentSlideIndex === totalSlides) {
+                setTimeout(() => {
+                    slides.style.transition = 'none';
+                    currentSlideIndex = 0;
+                    updateSlidePosition();
+                    slides.children[currentSlideIndex].classList.add('active');
+                    setTimeout(() => slides.style.transition = 'transform 0.5s ease-in-out', 0);
+                }, 1000);
+            }
+        }
+
+        function showPrevSlide() {
+            slides.children[currentSlideIndex].classList.remove('active');
+            if (currentSlideIndex === 0) {
+                slides.style.transition = 'none';
+                currentSlideIndex = totalSlides;
+                updateSlidePosition();
+                slides.children[currentSlideIndex].classList.add('active');
+                setTimeout(() => {
+                    slides.style.transition = 'transform 0.5s ease-in-out';
+                    showSlide(totalSlides - 1);
+                }, 0);
+            } else {
+                showSlide(currentSlideIndex - 1);
+            }
+        }
+
+        function updateSlidePosition() {
+            slides.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+        }
+
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active');
+                if (index === currentSlideIndex || (index === 0 && currentSlideIndex === totalSlides)) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        function showCurrentSlide(index) {
+            showSlide(index);
+        }
+
+        setInterval(showNextSlide, 2000); // Change slide every 2 seconds
+        updateDots();
+    </script>
+</body>
+</html>

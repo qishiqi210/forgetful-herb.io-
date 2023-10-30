@@ -1,0 +1,13 @@
+body {
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.6;
+  background: linear-gradient(to bottom, #ffffff, #d3d3d3), url('路径到你的文件夹/2.png');
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+}
